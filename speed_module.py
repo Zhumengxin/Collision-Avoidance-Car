@@ -19,6 +19,7 @@ def test_speed():
 			while not GPIO.input(speed_in):
 				pass
 			print "1"
+			
 			t2 = time.time()
 			cur_speed = cycle / (t2 - t1)
 			print "speed %f cm/s"%cur_speed 

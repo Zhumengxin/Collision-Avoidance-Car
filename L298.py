@@ -21,8 +21,6 @@ def init():
         GPIO.setup(40, GPIO.OUT)
         GPIO.setup(35, GPIO.OUT)
         GPIO.setup(37, GPIO.OUT)
-        GPIO.setup(13, GPIO.OUT)
-        GPIO.setup(15, GPIO.OUT)
 # 所有引脚置低电平，用于复位、停止运行的功能
 def reset():
         GPIO.output(18, GPIO.LOW)
@@ -37,58 +35,54 @@ def reset():
         GPIO.output(40, GPIO.LOW)
         GPIO.output(35, GPIO.LOW)
         GPIO.output(37, GPIO.LOW)
-        GPIO.output(13, GPIO.LOW)
-        GPIO.output(15, GPIO.LOW)
 # 左前轮向前转
 def front_left_back():
         GPIO.output(18, GPIO.HIGH)
         GPIO.output(11, GPIO.HIGH)
-        GPIO.output(13, GPIO.HIGH)
         GPIO.output(12, GPIO.LOW)
 
 def front_right_forward():
         GPIO.output(22, GPIO.HIGH)
         GPIO.output(16, GPIO.HIGH)
-        GPIO.output(13, GPIO.HIGH)
         GPIO.output(29, GPIO.LOW)
 
 def rear_left_forward():
         GPIO.output(38, GPIO.HIGH)
         GPIO.output(31, GPIO.HIGH)
-        GPIO.output(15, GPIO.HIGH)
         GPIO.output(33, GPIO.LOW)
 
 def rear_right_forward():
         GPIO.output(40, GPIO.HIGH)
         GPIO.output(35, GPIO.HIGH)
-        GPIO.output(15, GPIO.HIGH)
         GPIO.output(37, GPIO.LOW) 
 def front_left_forward():
         GPIO.output(18, GPIO.HIGH)
         GPIO.output(11, GPIO.LOW)
         GPIO.output(12, GPIO.HIGH)
-        GPIO.output(13, GPIO.HIGH) 
 def front_right_back():
         GPIO.output(22, GPIO.HIGH)
         GPIO.output(16, GPIO.LOW)
         GPIO.output(29, GPIO.HIGH)
-        GPIO.output(13, GPIO.HIGH) 
 def rear_left_back():
         GPIO.output(38, GPIO.HIGH)
         GPIO.output(31, GPIO.LOW)
         GPIO.output(33, GPIO.HIGH)
-        GPIO.output(15, GPIO.HIGH) 
 def rear_right_back():
         GPIO.output(40, GPIO.HIGH)
         GPIO.output(35, GPIO.LOW)
         GPIO.output(37, GPIO.HIGH)
-        GPIO.output(15, GPIO.HIGH)
 def forward():
         reset()
         front_left_forward()
         front_right_forward()
         rear_left_forward()
         rear_right_forward()
+def yuandi():
+		reset()
+		rear_right_back()
+		rear_left_forward()
+		front_right_back()
+		front_left_forward()
 
 def back():
         reset()

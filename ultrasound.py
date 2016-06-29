@@ -12,26 +12,36 @@ def init():
 	global ultrasound_echo
 	ultrasound_echo = 13
 #	GPIO.setmode(GPIO.BOARD)
-	GPIO.setup(ultrasound_trig,GPIO.OUT,initial = GPIO.LOW)
-	GPIO.setup(ultrasound_echo,GPIO.IN)
+	GPIO.setup(7,GPIO.OUT,initial = GPIO.LOW)
+	GPIO.setup(13,GPIO.IN)
+	print "sound init finish"
 
 def checkdist():
 	global distance
 	global ultrasound_trig
 	global ultrasound_echo
-	GPIO.output(ultrasound_trig,GPIO.HIGH)
+	GPIO.output(7,GPIO.HIGH)
 	time.sleep(0.000015)
-	GPIO.output(ultrasound_trig,GPIO.LOW)
-	while not GPIO.input(ultrasound_echo):
-		pass 
-	t1 = time.time()
+#	print "begin test"
+	try:
+		GPIO.output(7,GPIO.LOW)
+#		print "test 1"
+		while not GPIO.input(13):
+			pass 
+#		print "stage 1"
+		t1 = time.time()
 	#print "t1: %0.2f" % t1
-	while GPIO.input(ultrasound_echo):
-		pass
-	t2 = time.time()
+		while GPIO.input(13):
+			pass
+#		print "stage 2"
+		t2 = time.time()
 	#print "t2: %0.2f" % t2
-	distance =  (t2-t1) * 340 / 2
-	time.sleep(0.000015)
+		distance =  (t2-t1) * 340 / 2
+	#	print distance
+		time.sleep(0.000015)
+	except Exception,e:
+		print e
+		GPIO.cleanup() 
 	#print "Distance: %0.2f m" % distance
 	#time.sleep(1)
 #	return (t2-t1) * 340 / 2

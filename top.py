@@ -4,7 +4,7 @@ import ultrasound as sound
 import L298 as wheel 
 import thread
 import sys,tty,termios
-
+import time
 control_flag = 0
 
 def print_info():
@@ -43,7 +43,19 @@ if __name__=="__main__":
 #		wheel.forward()
 		fd = sys.stdin.fileno()
 		old_settings = termios.tcgetattr(fd)
-		a = raw_input("Which mode do you want to choose:\n1.atuo\n2.manual\n")		
+		a = raw_input("Which mode do you want to choose:\n1.atuo\n2.manual\n")
+		while str(a) == "1":
+			sound.checkdist()
+			#print "noe"
+			print sound.distance
+ 			if sound.distance < 0.15:
+				wheel.back()
+			elif sound.distance < 0.3:
+				wheel.front_right_turn()
+				#wheel.yuandi()
+			elif sound.distance >0.3:
+				wheel.forward()
+			time.sleep(0.5)		
 		while str(a) == "2":
 #			sound.checkdist()
 #			if sound.distance < 0.15:
@@ -83,6 +95,8 @@ if __name__=="__main__":
 					wheel.front_right_turn()
 					print "turn right"
 			elif ch == 'q':
+				print "quit"
+				GPIO.cleanup()
 				break
 			elif ch == ' ':
 				control_flag = 0
